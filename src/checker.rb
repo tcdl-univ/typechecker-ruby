@@ -85,21 +85,6 @@ class TypeChecker
 
 end
 
-class TypeCheckerValidator
-
-  attr_accessor :param, :type
-
-  def initialize(param, type)
-    self.param = param
-    self.type = type
-  end
-
-  def validate_value_type(value)
-    raise "TypeError: #{value} is not type of #{self.type}" unless value.class == self.type
-  end
-
-end
-
 module TypeSystem
 
   def get_untyped_method(sym)
