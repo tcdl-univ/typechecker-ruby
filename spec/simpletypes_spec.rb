@@ -38,30 +38,30 @@ describe 'Test simple method types' do
 
   end
 
-  it 'test simple method entry ' do
+  it 'spec simple method entry ' do
     person = Person.new
     expect(person.personal 45).to eq 34
 
   end
 
-  it 'test simple method entry ' do
+  it 'spec simple method entry ' do
     person = Person.new
     expect(person.personal_two_params 2, 45).to eq 34
 
   end
 
-  it 'test manager method, no arguments' do
+  it 'spec manager method, no arguments' do
     person = Person.new
     expect((person.manager).class).to eq Person
   end
 
-  it 'test invalid type' do
+  it 'spec invalid type' do
     person = Person.new
     expect { person.personal 'ee' }.to raise_error TypeCheckError
   end
 
 
-  it 'test arity error' do
+  it 'spec arity error' do
     person = Person.new
     expect { person.personal 2, 4 }.to raise_error ArityTypeError
   end
