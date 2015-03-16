@@ -1,5 +1,5 @@
 require 'rspec'
-require_relative '../src/checker'
+require_relative '../src/system'
 require_relative '../src/other'
 
 
@@ -34,6 +34,11 @@ describe 'Test simple method types' do
 
       typesig(:manager, ()).to Person
 
+
+      def persona_indiferent(id)
+        Person.new
+      end
+      typesig(:persona_indiferent, [Numeric]).any
     end
 
   end
@@ -60,6 +65,15 @@ describe 'Test simple method types' do
     expect { person.personal 'ee' }.to raise_error TypeCheckError
   end
 
+  it 'spec persona_indiferent with invalid method' do
+    person = Person.new
+    expect{(person.persona_indiferent "34").class}.to raise_error TypeError
+  end
+
+  it 'spec persona_indiferent with valid method' do
+    person = Person.new
+    expect((person.persona_indiferent 34).class).to eq Person
+  end
 
   it 'spec arity error' do
     person = Person.new
@@ -81,5 +95,21 @@ describe 'Test simple method types' do
 
   end
 
+  it 'class with inner operations' do
+    class AClass
+      def a_math_operation(a, b)
+        a *2 + b
+      end
+
+      typesig(:a_math_operation, [Numeric, Numeric]).to Numeric
+
+    end
+
+    foo = AClass.new
+    expect(foo.a_math_operation (3+2), 1).to eq 11
+
+  end
+
 
 end
+

@@ -6,3 +6,10 @@ module ModuleRemover
   end
 
 end
+
+
+def get_class_from_call_stack(caller)
+  class_name = caller[0]
+  class_name = class_name.scan(/([A-Z]\w+)/).first.last
+  Kernel.const_get class_name
+end
